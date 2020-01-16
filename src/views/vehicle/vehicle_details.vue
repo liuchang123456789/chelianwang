@@ -1,195 +1,210 @@
 <template>
-	<div class="container">
-		<!-- 搜索框 -->
-		<el-form :inline="true" :model="form" ref="form" label-width="100px" class="demo-ruleForm">
-			<div class="warpper" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;">
-				<div class="order_title">
-					<i></i>车辆详情
-				</div>
-				<div class="order_search">
-					<p class="title_little"><i></i>基础信息</p>
-					<div class="int_model">
-						<div>
-							<i style="color: #EF5565;margin-right: 10px; ">*</i>车牌号: &nbsp;&nbsp;{{form.num}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>牌照类型: &nbsp;{{form.num_type}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>车辆来源: &nbsp;{{form.source == 1 ? '自有车' : '外请车' }}
-						</div>
-					</div>
-					<div class="int_model mt30">
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>车架号: &nbsp;&nbsp;{{form.frame_num}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>发动机号: &nbsp;&nbsp;{{form.engine_num}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>品牌型号: &nbsp;&nbsp;{{form.brand_num}}
-						</div>
-					</div>
-					<div class="int_model mt30">
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>车辆类型: &nbsp;{{form.type}}/{{form.length}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>车辆载重: &nbsp;{{form.load}}/吨
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>车辆容量: &nbsp;{{form.volume}}/立方米
-						</div>
-					</div>
-					<div class="int_model mt30">
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>行驶证注册日期: &nbsp;&nbsp;{{form.driving_p_register_time}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>检验有效期至: &nbsp;&nbsp;{{form.driving_p_valid_time}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>所有人: &nbsp;&nbsp;{{form.driving_p_ascribe}}
-						</div>
-					</div>
-					<div class="int_model mt30">
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>营运许可号 &nbsp;&nbsp;{{form.operation_num}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>营运注册日期 &nbsp;&nbsp;{{form.operation_register_time}}
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>营运有效期至: &nbsp;&nbsp;{{form.operation_valid_time}}
-						</div>
-					</div>
-					<div class="int_model mt30">
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>GPS设备号: &nbsp;&nbsp;{{form.gps_device_num}}
-						</div>
-					</div>
-				</div>
-			</div>
+  <div class="container">
+    <!-- 搜索框 -->
+    <el-form ref="form" :inline="true" :model="form" label-width="100px" class="demo-ruleForm">
+      <div class="warpper" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;">
+        <div class="order_title">
+          <i />车辆详情
+        </div>
+        <div class="order_search">
+          <p class="title_little"><i />基础信息</p>
+          <div class="int_model">
+            <div>
+              <i style="color: #EF5565;margin-right: 10px; ">*</i>车牌号: &nbsp;&nbsp;{{ form.num }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>牌照类型: &nbsp;{{ form.num_type == '1' ? '拖车' : form.num_type == '2' ? '挂车' : '整车' }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>车辆来源: &nbsp;{{ form.source == 1 ? '自有车' : '外请车' }}
+            </div>
+          </div>
+          <div class="int_model mt30">
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>车架号: &nbsp;&nbsp;{{ form.frame_num }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>发动机号: &nbsp;&nbsp;{{ form.engine_num }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>品牌型号: &nbsp;&nbsp;{{ form.brand_num }}
+            </div>
+          </div>
+          <div class="int_model mt30">
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>车辆类型: &nbsp;{{ form.type }}/{{ form.length }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>车辆载重: &nbsp;{{ form.load }}/吨
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>车辆容量: &nbsp;{{ form.volume }}/立方米
+            </div>
+          </div>
+          <div class="int_model mt30">
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>行驶证注册日期: &nbsp;&nbsp;{{ form.driving_p_register_time }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>检验有效期至: &nbsp;&nbsp;{{ form.driving_p_valid_time }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>所有人: &nbsp;&nbsp;{{ form.driving_p_ascribe }}
+            </div>
+          </div>
+          <div class="int_model mt30">
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>营运许可号 &nbsp;&nbsp;{{ form.operation_num }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>营运注册日期 &nbsp;&nbsp;{{ form.operation_register_time }}
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>营运有效期至: &nbsp;&nbsp;{{ form.operation_valid_time }}
+            </div>
+          </div>
+          <div class="int_model mt30">
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>GPS设备号: &nbsp;&nbsp;{{ form.gps_device_num }}
+            </div>
+          </div>
+        </div>
+      </div>
 
-			<div class="warpper mt30" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;background: #fff;padding: 26px">
-				<p class="title_little"><i></i>归属信息</p>
-				<div class="int_model mt30">
-					<div>
-						<i style="color: #EF5565;margin-right: 10px;">*</i>负责人: &nbsp;&nbsp;{{form.principal}}
-					</div>
-					<div>
-						<i style="color: #EF5565;margin-right: 10px;">*</i>联系手机号: &nbsp;&nbsp;{{form.principal_phone}}
-					</div>
-					<div></div>
-				</div>
-			</div>
+      <div class="warpper mt30" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;background: #fff;padding: 26px">
+        <p class="title_little"><i />归属信息</p>
+        <div class="int_model mt30">
+          <div>
+            <i style="color: #EF5565;margin-right: 10px;">*</i>负责人: &nbsp;&nbsp;{{ form.principal }}
+          </div>
+          <div>
+            <i style="color: #EF5565;margin-right: 10px;">*</i>联系手机号: &nbsp;&nbsp;{{ form.principal_phone }}
+          </div>
+          <div />
+        </div>
+      </div>
 
-			<div class="warpper mt30" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;background: #fff;padding: 26px">
-				<p class="title_little"><i></i>成本信息</p>
-				<div class="int_model">
-					<div>
-						<i style="color: #EF5565;margin-right: 10px; ">*</i>保险费: &nbsp;&nbsp;{{form.premium}}{{form.premium_time_type}}
-					</div>
-					<div>
-						<i style="color: #EF5565;margin-right: 10px;">*</i>保险有效期: &nbsp;{{form.premium_time}}至{{form.premium_valid_time}}
-					</div>
-					<div>
-						<i style="color: #EF5565;margin-right: 10px;">*</i>车轴数: &nbsp;{{form.axle_num}}
-					</div>
-				</div>
-				<div class="int_model mt30">
-					<div class="int_model mt30">
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>车辆总价: &nbsp;&nbsp;{{form.total}}/万
-						</div>
-						<div>
-							<i style="color: #EF5565;margin-right: 10px;">*</i>车辆行驶周期: &nbsp;&nbsp;{{form.operation_cycle}}/公里
-						</div>
-						<div></div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="warpper mt30" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;background: #fff;padding: 26px">
-				<p class="title_little"><i></i>车辆照片</p>
-				<div class="upimg">
-					<el-dialog :visible.sync="dialogVisible" size="tiny">
-						<img width="100%" :src="dialogImageUrl" alt="">
-					</el-dialog>
-					<el-upload style="line-height: 36px;float: left;" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card">
-						<i class="el-icon-plus" style="margin-top: 32px;"></i>
-						<p>车辆示例图片</p>
-					</el-upload>
+      <div class="warpper mt30" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;background: #fff;padding: 26px">
+        <p class="title_little"><i />成本信息</p>
+        <div class="int_model">
+          <div>
+            <i style="color: #EF5565;margin-right: 10px; ">*</i>保险费: &nbsp;&nbsp;{{ form.premium }}{{ form.premium_time_type }}
+          </div>
+          <div>
+            <i style="color: #EF5565;margin-right: 10px;">*</i>保险有效期: &nbsp;{{ form.premium_time }}至{{ form.premium_valid_time }}
+          </div>
+          <div>
+            <i style="color: #EF5565;margin-right: 10px;">*</i>车轴数: &nbsp;{{ form.axle_num }}
+          </div>
+        </div>
+        <div class="int_model mt30">
+          <div class="int_model mt30">
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>车辆总价: &nbsp;&nbsp;{{ form.total }}/万
+            </div>
+            <div>
+              <i style="color: #EF5565;margin-right: 10px;">*</i>车辆行驶周期: &nbsp;&nbsp;{{ form.operation_cycle }}/公里
+            </div>
+            <div />
+          </div>
+        </div>
+      </div>
 
-					<el-upload class="ml30" style="line-height: 36px;float: left;" action="https://jsonplaceholder.typicode.com/posts/"
-					 list-type="picture-card" >
-						<i class="el-icon-plus" style="margin-top: 32px;"></i>
-						<p>营运证示例图片</p>
-					</el-upload>
+      <div class="warpper mt30" style="box-shadow:0px 2px 5px rgba(18,31,62,0.16);border-radius:5px;background: #fff;padding: 26px">
+        <p class="title_little"><i />车辆照片</p>
+        <div class="upimg">
+          <el-dialog :visible.sync="dialogVisible" size="tiny">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
+          <el-upload style="line-height: 36px;float: left;" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card">
+            <i class="el-icon-plus" style="margin-top: 32px;" />
+            <p>车辆示例图片</p>
+          </el-upload>
 
-					<el-upload class="ml30" style="line-height: 36px;float: left;" action="https://jsonplaceholder.typicode.com/posts/"
-					 list-type="picture-card">
-						<i class="el-icon-plus" style="margin-top: 32px;"></i>
-						<p>特殊营运证示例图片</p>
-					</el-upload>
+          <el-upload
+            class="ml30"
+            style="line-height: 36px;float: left;"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            list-type="picture-card"
+          >
+            <i class="el-icon-plus" style="margin-top: 32px;" />
+            <p>营运证示例图片</p>
+          </el-upload>
 
-					<el-upload class="ml30" style="line-height: 36px;float: left;" action="https://jsonplaceholder.typicode.com/posts/"
-					 list-type="picture-card">
-						<i class="el-icon-plus" style="margin-top: 32px;"></i>
-						<p>行驶证正本</p>
-					</el-upload>
+          <el-upload
+            class="ml30"
+            style="line-height: 36px;float: left;"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            list-type="picture-card"
+          >
+            <i class="el-icon-plus" style="margin-top: 32px;" />
+            <p>特殊营运证示例图片</p>
+          </el-upload>
 
-					<el-upload class="ml30" style="line-height: 36px;float: left;" action="https://jsonplaceholder.typicode.com/posts/"
-					 list-type="picture-card">
-						<i class="el-icon-plus" style="margin-top: 32px;"></i>
-						<p>行驶证副本</p>
-					</el-upload>
-				</div>
+          <el-upload
+            class="ml30"
+            style="line-height: 36px;float: left;"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            list-type="picture-card"
+          >
+            <i class="el-icon-plus" style="margin-top: 32px;" />
+            <p>行驶证正本</p>
+          </el-upload>
 
-			</div>
-		</el-form>
-	</div>
+          <el-upload
+            class="ml30"
+            style="line-height: 36px;float: left;"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            list-type="picture-card"
+          >
+            <i class="el-icon-plus" style="margin-top: 32px;" />
+            <p>行驶证副本</p>
+          </el-upload>
+        </div>
+
+      </div>
+    </el-form>
+  </div>
 </template>
 <script>
-	import {
-		detAils
-	} from '../../api/vehicle'
-	export default {
-		data() {
-			return {
-				form:null,
-				id:'1',
-				dialogVisible:false,
-				imageUrl: '',
-				dialogImageUrl:false,
-			}
-		},
-		methods: {
-			// handleRemove(file, fileList) {
-			// 	console.log(file, fileList);
-			// },
-			// handlePictureCardPreview(file) {
-			// 	this.dialogImageUrl = file.url;
-			// 	this.dialogVisible = true;
-			// }
-		},
-		created() {
-			
-			console.log(this.form)
-			if(!this.$route.params.id){
-				this.$router.push({name:'vehiclefiles'})
-			}
-			let data = {
-				id: this.$route.params.id
-			}
-			console.log(data)
-			detAils(data).then(res => {
-				console.log(res)
-				this.form = res.result
-			})
-			
-		}
-	}
+import {
+  detAils
+} from '../../api/vehicle'
+export default {
+  data() {
+    return {
+      form: null,
+      id: '1',
+      dialogVisible: false,
+      imageUrl: '',
+      dialogImageUrl: false
+    }
+  },
+  created() {
+    console.log(this.form)
+    if (!this.$route.params.id) {
+      this.$router.push({ name: 'vehiclefiles' })
+    }
+    const data = {
+      id: this.$route.params.id
+    }
+    console.log(data)
+    detAils(data).then(res => {
+      console.log(res)
+      this.form = res.result
+    })
+  },
+  methods: {
+    // handleRemove(file, fileList) {
+    // 	console.log(file, fileList);
+    // },
+    // handlePictureCardPreview(file) {
+    // 	this.dialogImageUrl = file.url;
+    // 	this.dialogVisible = true;
+    // }
+
+  }
+}
 </script>
 <style lang="scss" scope>
 	.avatar-uploader .el-upload {
@@ -218,7 +233,6 @@
 		height: 178px;
 		display: block;
 	}
-
 
 	.container {
 		padding: 20px;

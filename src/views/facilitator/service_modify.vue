@@ -86,51 +86,54 @@
       </div>
       <div class="sub_warpper">
         <input type="button" value="取消" @click="onRest">
-        <input type="button" value="保存" @click="onButton">
+        <input type="button" value="修改" @click="onButton">
       </div>
     </el-form>
   </div>
 </template>
 <script>
 import {
-  setAdd
+  setEdit, getDetails
 } from '../../api/facilitator'
 export default {
   data() {
     return {
-      form: {
-        service_name: '',
-        name: '',
-        phone: '',
-        state: '',
-        type: '',
-        address: '',
-        identity: '',
-        close_way: '',
-        img_reverse: null,
-        img_front: null
-      },
-
+      form: {},
       id: ''
-
     }
+  },
+  created() {
+		  if (!this.$route.params.id) {
+		    this.$router.push({
+		      name: 'facilitatorfiles'
+		    })
+		  }
+		  this.form.id = this.$route.params.id
+		  const form = {
+		    id: this.$route.params.id
+		  }
+		  getDetails(form).then(res => {
+		    console.log(res)
+		    this.form = res.result
+		  })
   },
   methods: {
 
     onButton() {
-      setAdd(this.form).then(res => {
-        console.log(res)
-        if (res.code == 200) {
-          this.$router.push({
-            name: 'facilitatorfiles'
-          })
-        }
-      })
+			  setEdit(this.form).then(res => {
+			    console.log(this.form)
+			    this.form = res.result
+			    if (res.code == 200) {
+			      this.$router.push({
+			        name: 'facilitatorfiles'
+			      })
+			    }
+			  })
     },
     onRest() {
-      this.$router.push({
-        name: 'facilitatorfiles'
-      })
+			  this.$router.push({
+			    name: 'facilitatorfiles'
+			  })
     }
 
   }

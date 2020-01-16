@@ -1,137 +1,83 @@
 <template>
   <div class="container">
     <!-- 搜索框 -->
-    <el-form ref="form" :model="form" :rules="form" label-width="100px" class="demo-form">
-      <div class="order_title">
-        <i />新增服务商
+    <div class="order_title">
+      <i />服务商详情
+    </div>
+    <div class="order_search" style="padding-top:0;">
+      <p class="title_little pt25 mb25"><i />基础信息</p>
+      <div class="int_model">
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>服务商名称 &nbsp;&nbsp;{{ info.service_name }}
+        </div>
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>联系人 &nbsp;&nbsp;{{ info.name }}
+        </div>
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>联系人手机号 &nbsp;&nbsp;{{ info.phone }}
+        </div>
       </div>
-      <div class="order_search" style="padding-top:0;">
-        <p class="title_little pt25 mb25"><i />基础信息</p>
-        <div class="int_model">
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>服务商名称 &nbsp;&nbsp;<el-input
-              v-model="form.service_name"
-              style="width: 60%"
-              placeholder="请输入服务商名字"
-            />
-          </div>
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>联系人 &nbsp;&nbsp;<el-input
-              v-model="form.name"
-              style="width: 60%"
-              placeholder="请输入内容"
-            />
-          </div>
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>联系人手机号 &nbsp;&nbsp;<el-input
-              v-model="form.phone"
-              style="width: 60%"
-              placeholder="请输入内容"
-            />
-          </div>
+      <div class="int_model mt36">
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>服务商状态 &nbsp;{{ info.state[0] == '1' ? '无效' : '有效' }}
         </div>
-        <div class="int_model mt36">
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>服务商状态 &nbsp;
-            <el-select v-model="form.state" placeholder="请选择" style="width: 60%">
-              <el-option label="无效" value="1" />
-              <el-option label="有效" value="2" />
-            </el-select>
-          </div>
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>服务商类型 &nbsp;
-            <el-select v-model="form.type" placeholder="请选择" style="width:54%">
-              <el-option label="油卡" value="1" />
-              <el-option label="ETC" value="2" />
-              <el-option label="维修保养" value="3" />
-            </el-select>
-          </div>
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>公司地址 &nbsp;&nbsp;<el-input
-              v-model="form.address"
-              style="width: 66%"
-              placeholder="请输入内容"
-            />
-          </div>
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>服务商类型 &nbsp;{{ info.type == '1' ? '油卡' : info.type == '2' ? 'ETC' : '维修保养' }}
         </div>
-        <div class="int_model mt36">
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>身份证号 &nbsp;&nbsp;<el-input
-              v-model="form.identity"
-              style="width: 63%"
-              placeholder="请输入内容"
-            />
-          </div>
-          <div />
-          <div />
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>公司地址 &nbsp;&nbsp;{{ info.address }}
         </div>
+      </div>
+      <div class="int_model mt36">
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>身份证号 &nbsp;&nbsp;{{ info.identity }}
+        </div>
+        <div />
+        <div />
+      </div>
 
-        <p class="title_little pt25 mb25">上传证件</p>
-        <div class="int_model" style="height: auto;" />
+      <p class="title_little pt25 mb25">上传证件</p>
+      <div class="int_model" style="height: auto;" />
 
-      </div>
-      <div class="order_search mt20" style="padding-top:0;">
-        <p class="title_little pt25 mb25"><i />账期信息</p>
+    </div>
+    <div class="order_search mt20" style="padding-top:0;">
+      <p class="title_little pt25 mb25"><i />账期信息</p>
 
-        <div class="int_model mt36">
-          <div>
-            <i style="color: #EF5565;margin-right: 10px;">*</i>结算方式 &nbsp;
-            <el-select v-model="form.close_way" placeholder="请选择" style="width:63%">
-              <el-option label="账期" value="1" />
-              <el-option label="无账期" value="2" />
-              <el-option label="月结" value="3" />
-            </el-select>
-          </div>
+      <div class="int_model mt36">
+        <div>
+          <i style="color: #EF5565;margin-right: 10px;">*</i>结算方式 &nbsp;{{ info.close_way }}
         </div>
       </div>
-      <div class="sub_warpper">
-        <input type="button" value="取消" @click="onRest">
-        <input type="button" value="保存" @click="onButton">
-      </div>
-    </el-form>
+    </div>
+
   </div>
 </template>
 <script>
 import {
-  setAdd
+  getDetails
 } from '../../api/facilitator'
 export default {
   data() {
     return {
-      form: {
-        service_name: '',
-        name: '',
-        phone: '',
-        state: '',
-        type: '',
-        address: '',
-        identity: '',
-        close_way: '',
-        img_reverse: null,
-        img_front: null
+      info: {
       },
-
       id: ''
 
     }
   },
-  methods: {
-
-    onButton() {
-      setAdd(this.form).then(res => {
-        console.log(res)
-        if (res.code == 200) {
-          this.$router.push({
-            name: 'facilitatorfiles'
-          })
-        }
-      })
-    },
-    onRest() {
-      this.$router.push({
-        name: 'facilitatorfiles'
-      })
+  created() {
+    if (!this.$route.params.id) {
+      this.$router.push({ name: 'facilitatorfiles' })
     }
+    const data = {
+      id: this.$route.params.id
+    }
+    getDetails(data).then(res => {
+      console.log(res)
+      this.info = res.result
+    })
+  },
+  methods: {
 
   }
 }
